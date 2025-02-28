@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mdanter\Ecc\Curves;
@@ -34,6 +35,8 @@ class CurveFactory
                 return $nistFactory->curve521();
             case SecgCurve::NAME_SECP_112R1:
                 return $secpFactory->curve112r1();
+            case SecgCurve::NAME_SECP_128R1:
+                return $secpFactory->curve128r1();
             case SecgCurve::NAME_SECP_192K1:
                 return $secpFactory->curve192k1();
             case SecgCurve::NAME_SECP_256K1:
@@ -72,6 +75,8 @@ class CurveFactory
                 return $nistFactory->generator521();
             case SecgCurve::NAME_SECP_112R1:
                 return $secpFactory->generator112r1();
+            case SecgCurve::NAME_SECP_128R1:
+                return $secpFactory->generator128r1();
             case SecgCurve::NAME_SECP_192K1:
                 return $secpFactory->generator192k1();
             case SecgCurve::NAME_SECP_256K1:
