@@ -43,6 +43,7 @@ class SecgCurve
     private $adapter;
 
     const NAME_SECP_112R1 = 'secp112r1';
+    const NAME_SECP_128R1 = 'secp128r1';
     const NAME_SECP_192K1 = 'secp192k1';
     const NAME_SECP_256K1 = 'secp256k1';
     const NAME_SECP_256R1 = 'secp256r1';
@@ -81,6 +82,35 @@ class SecgCurve
         $order = gmp_init('0xDB7C2ABF62E35E7628DFAC6561C5', 16);
         $x = gmp_init('0x09487239995A5EE76B55F9C2F098', 16);
         $y = gmp_init('0xA89CE5AF8724C0A23E0E0FF77500', 16);
+
+        return $curve->getGenerator($x, $y, $order, $randomGenerator);
+    }
+
+     /**
+     * @return NamedCurveFp
+     */
+    public function curve128r1(): NamedCurveFp
+    {
+        $p = gmp_init('0xFFFFFFFDFFFFFFFFFFFFFFFFFFFFFFFF', 16);
+        $a = gmp_init('0xFFFFFFFDFFFFFFFFFFFFFFFFFFFFFFFC', 16);
+        $b = gmp_init('0xE87579C11079F43DD824993C2CEE5ED3', 16);
+
+        $parameters = new CurveParameters(128, $p, $a, $b);
+
+        return new NamedCurveFp(self::NAME_SECP_128R1, $parameters, $this->adapter);
+    }
+
+    /**
+     * @param RandomNumberGeneratorInterface|null $randomGenerator
+     * @return GeneratorPoint
+     */
+    public function generator128r1(RandomNumberGeneratorInterface $randomGenerator = null): GeneratorPoint
+    {
+        $curve = $this->curve128r1();
+
+        $order = gmp_init('0xFFFFFFFE0000000075A30D1B9038A115', 16);
+        $x = gmp_init('0x161FF7528B899B2D0C28607CA52C5B86', 16);
+        $y = gmp_init('0xCF5AC8395BAFEB13C02DA292DDED7A83', 16);
 
         return $curve->getGenerator($x, $y, $order, $randomGenerator);
     }
